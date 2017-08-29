@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Bevy\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

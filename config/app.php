@@ -172,11 +172,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Bevy\Providers\AppServiceProvider::class,
+        Bevy\Providers\AuthServiceProvider::class,
+        // Bevy\Providers\BroadcastServiceProvider::class,
+        Bevy\Providers\EventServiceProvider::class,
+        Bevy\Providers\RouteServiceProvider::class,
 
     ],
 
