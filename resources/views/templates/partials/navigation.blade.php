@@ -1,16 +1,19 @@
 
 <div class="top-bar">
     <div class="top-bar-left">
-
-        <ul class="dropdown menu" data-dropdown-menu>
+        <form class="top-bar-left" role="search" action="{{ route('search.results') }}">
+        <ul class="menu">
             <li class="menu-text"><a href="{{ route('home') }}">Bevy</a></li>
         @if (Auth::check())
             <li><a href="#">Timeline</a></li>
             <li><a href="#">Znajomi</a></li>
-            <li><input type="search" placeholder="Szukaj znajomych"></li>
-            <li><button type="button" class="button">Szukaj</button></li>
+            <li><input type="search" name="szukaj" placeholder="Szukaj znajomych"></li>
+            <li><button type="submit" class="button">Szukaj</button></li>
+
         @endif
         </ul>
+        </form>
+
 
     </div>
     <div class="top-bar-right">

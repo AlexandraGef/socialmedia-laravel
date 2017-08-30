@@ -31,11 +31,13 @@ Route::post('/rejestracja',[
 
 Route::get('/logowanie',[
     'uses' => '\Bevy\Http\Controllers\AuthController@getSignin',
-    'as'=> 'auth.signin'
+    'as'=> 'auth.signin',
+    'middleware' => ['guest'],
 ]);
 
 Route::post('/logowanie',[
     'uses' => '\Bevy\Http\Controllers\AuthController@postSignin',
+    'middleware' => ['guest'],
 ]);
 
 Route::get('/wyloguj',[
@@ -43,5 +45,9 @@ Route::get('/wyloguj',[
     'as'=> 'auth.signout',
 ]);
 
+/*Search*/
 
-
+Route::get('/szukaj',[
+    'uses' => '\Bevy\Http\Controllers\SearchController@getResults',
+    'as'=> 'search.results',
+]);
