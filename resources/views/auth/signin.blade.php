@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="medium-5 columns">
+            <fieldset class="medium-5 columns">
               <fieldset>
                   <label>
                       <input type="checkbox" name="remember">

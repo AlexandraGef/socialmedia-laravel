@@ -19,8 +19,8 @@
     <div class="top-bar-right">
         <ul class="menu">
         @if(Auth::check())
-        <li><a href="#">{{ Auth::user()->getNameOrUsername() }}</a></li>
-        <li><a href="#">Edytuj profil</a></li>
+        <li><a href="{{route('profile.index',['username'=> Auth::user()->username])}}">{{ Auth::user()->getNameOrUsername() }}</a></li>
+        <li><a href="{{route ('profile.edit')}}">Edytuj profil</a></li>
         <li><a href="{{ route('auth.signout') }}">Wyloguj</a></li>
         @else
         <li><a href="{{ route('auth.signup') }}">Zarejestruj</a></li>

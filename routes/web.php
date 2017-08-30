@@ -51,3 +51,22 @@ Route::get('/szukaj',[
     'uses' => '\Bevy\Http\Controllers\SearchController@getResults',
     'as'=> 'search.results',
 ]);
+
+/*User profile*/
+
+
+Route::get('/uzytkownik/{username}',[
+    'uses' => '\Bevy\Http\Controllers\ProfileController@getProfile',
+    'as'=> 'profile.index',
+]);
+
+Route::get('/profil/edycja',[
+    'uses' => '\Bevy\Http\Controllers\ProfileController@getEdit',
+    'as'=> 'profile.edit',
+    'middleware'=>['auth'],
+]);
+
+Route::post('/profil/edycja',[
+    'uses' => '\Bevy\Http\Controllers\ProfileController@postEdit',
+    'middleware'=>['auth'],
+]);
