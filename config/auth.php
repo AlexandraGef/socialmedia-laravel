@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Bevy\User::class,
+            'model' => Bevy\Models\User::class,
         ],
 
         // 'users' => [
