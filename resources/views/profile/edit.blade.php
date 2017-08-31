@@ -11,25 +11,25 @@
             <form role="form" method="post" action="{{route('profile.edit')}}">
                 <div class="large-6 columns">
                         <label>Imię
-                        <input type="text" name="imie" id="first_name" value="{{Auth::user()->first_name ?: Request::old('imie')}}">
-                            @if($errors->has('imie'))
-                                <span class="help-text" id="form-error">{{$errors->first('imie')}}</span>
+                        <input type="text" name="first_name" id="first_name" value="{{Request::old('first_name') ?: Auth::user()->first_name }}">
+                            @if($errors->has('first_name'))
+                                <span class="help-text" id="form-error">{{$errors->first('first_name')}}</span>
                             @endif
                         </label>
                 </div>
                 <div class="large-6 columns">
                         <label>Nazwisko
-                        <input type="text" name="nazwisko" id="last_name" value="{{Auth::user()->last_name ?: Request::old('nazwisko')}}">
-                            @if($errors->has('nazwisko'))
-                                <span class="help-text" id="form-error">{{$errors->first('nazwisko')}}</span>
+                        <input type="text" name="last_name" id="last_name" value="{{Request::old('last_name') ?: Auth::user()->last_name}}">
+                            @if($errors->has('last_name'))
+                                <span class="help-text" id="form-error">{{$errors->first('last_name')}}</span>
                             @endif
                         </label>
                 </div>
                 <div class="large-12 columns">
                         <label>Miejsce zamieszkania
-                        <input type="text" name="miasto" id="location" value="{{Auth::user()->location ?: Request::old('miasto')}}">
-                            @if($errors->has('miasto'))
-                                <span class="help-text" id="form-error">{{$errors->first('miasto')}}</span>
+                        <input type="text" name="location" id="location" value="{{Request::old('location') ?: Auth::user()->location }}">
+                            @if($errors->has('location'))
+                                <span class="help-text" id="form-error">{{$errors->first('location')}}</span>
                             @endif
                         </label>
                 </div>

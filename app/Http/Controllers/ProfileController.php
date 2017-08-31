@@ -6,7 +6,7 @@
  * Time: 12:51
  */
 namespace Bevy\Http\Controllers;
-
+use Auth;
 use Bevy\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,11 +30,18 @@ class ProfileController extends Controller
    public function postEdit(Request $request)
    {
  $this->validate($request, [
-     'imie' =>'alpha|max:20',
-     'nazwisko' => 'alpha|max:30',
-     'miasto' =>'max:50',
+     'first_name' =>'alpha|max:20',
+     'last_name' => 'alpha|max:30',
+     'location' =>'max:50',
  ]);
- dd('ok');
+Auth::user()->update([
+    'first_name' => $request->input('first_name'),
+    'last_name' => $request->input('last_name'),
+    'location'=> $request->input('location'),
+]);
+return redirect()
+    ->route('profile.edit')
+    ->with('success' ,'Twój profil został zaktualizowany !');
    }
 
 }

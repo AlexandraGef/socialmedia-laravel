@@ -50,5 +50,17 @@ class User extends Model implements AuthenticatableContract
  {
      return "https://www.gravatar.com/avatar/{{ md5($this->email)}}?d=mm&&s=60";
  }
+ public function friendsOfMine()
+ {
+     return $this->belongsToMany('Bevy\Models\User', 'friends', 'user_id', 'friend_id');
+ }
 
+ public  function friendOf()
+ {
+     return $this->belongsToMany('Bevy\Models\User', 'friends', 'friend_id', 'user_id');
+ }
+ public function friends()
+ {
+     return $this->friendsOfMine()->wherePivot('accepted', true)->get();
+ }
 }
