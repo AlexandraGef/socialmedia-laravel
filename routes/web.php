@@ -70,3 +70,11 @@ Route::post('/profil/edycja',[
     'uses' => '\Bevy\Http\Controllers\ProfileController@postEdit',
     'middleware'=>['auth'],
 ]);
+/*Friends*/
+
+Route::get('/znajomi',[
+    'uses' => '\Bevy\Http\Controllers\FriendController@getIndex',
+    'as'=> 'friend.index',
+    'middleware'=>['auth'],
+]);
+

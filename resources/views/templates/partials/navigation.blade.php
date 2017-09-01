@@ -5,8 +5,8 @@
         <ul class="menu">
             <li class="menu-text"><a href="{{ route('home') }}">Bevy</a></li>
         @if (Auth::check())
-            <li><a href="#">Timeline</a></li>
-            <li><a href="#">Znajomi</a></li>
+            <li><a href="{{ route('home') }}">Timeline</a></li>
+            <li><a href="{{ route('friend.index') }}">Znajomi</a></li>
             <li><input type="search" name="szukaj" placeholder="Szukaj znajomych"></li>
             <li><button type="submit" class="button">Szukaj</button></li>
 

@@ -61,6 +61,8 @@ class User extends Model implements AuthenticatableContract
  }
  public function friends()
  {
-     return $this->friendsOfMine()->wherePivot('accepted', true)->get();
+     return $this->friendsOfMine()->wherePivot('accepted', true)
+         ->get()->merge($this->friendOf()->wherePivot('accepted',true)->get());
+
  }
 }

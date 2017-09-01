@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div class="large-3 columns">
-                <button type="submit" class="button radius">Zarejestruj się</button>
+                <button type="submit" class="button radius">Zaloguj się</button>
             </div>
         </div>
         <input type="hidden" name="_token" value="{{ Session::token() }}">
