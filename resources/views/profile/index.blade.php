@@ -10,11 +10,11 @@
          @if (Auth::user()->hasFriendRequestsPending($user))
              <p>Oczekiwanie na akceptację Twojego zaproszenia przez {{ $user->getNameOrUsername() }}</p>
              @elseif(Auth::user()->hasFriendRequestReceived($user))
-             <a href="#" class="button">Akceptuj zaproszenie do znajomych</a>
+             <a href="{{route('friend.accept', ['username'=>$user->username])}}" class="button">Akceptuj zaproszenie do znajomych</a>
              @elseif(Auth::user()->isFriendsWith($user))
              <p>Ty i {{ $user->getFirstNameOrUsername() }} jesteście znajomymi</p>
-             @else
-             <a href="#" class="button">Dodaj do znajomych</a>
+             @elseif(Auth::user()->id !== $user->id)
+             <a href="{{route('friend.add', ['username'=> $user->username])}}" class="button">Dodaj do znajomych</a>
          @endif
 <h4>Znajomi użytkownika {{ $user->getFirstNameOrUsername() }}</h4>
          @if(!$user->friends()->count())

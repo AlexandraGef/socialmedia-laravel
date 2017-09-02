@@ -20,5 +20,57 @@ class FriendController extends Controller
             ->with('friends', $friends)
             ->with('requests', $requests);
     }
+    public function getAdd($username)
+    {
+        $user = User::where('username', $username)->first();
+
+        if(!$user){
+            return redirect()
+                ->route('home')
+                ->with('alert','Dany użytkownik nie został znaleziony');
+        }
+
+        if(Auth::user()->id === $user->id){
+            return redirect()->route('home');
+        }
+        if(Auth::user()->hasFriendRequestsPending($user) || $user->
+            hasFriendRequestReceived(Auth::user())) {
+            return redirect()
+                ->route('profile.index',['username' =>$user->username])
+            ->with('info', 'Oczekujące zaproszenie do znajomych');
+        }
+
+        if(Auth::user()->isFriendsWith($user)) {
+            return redirect()
+                ->route('profile.index',['username'=>$user->username])
+                ->with('info','Jesteście już znajomymi');
+        }
+        Auth::user()->addFriend($user);
+
+        return redirect()
+            ->route('profile.index',['username'=> $username])
+            ->with('success','Zaproszenie do znajomych zostało wysłane');
+
+    }
+    public function getAccept($username)
+    {
+        $user = User::where('username', $username)->first();
+
+        if(!$user){
+            return redirect()
+                ->route('home')
+                ->with('alert','Dany użytkownik nie został znaleziony');
+        }
+
+        if(!Auth::user()->hasFriendRequestReceived($user)){
+            return redirect()->route('home');
+        }
+
+        Auth::user()->acceptFriendRequest($user);
+
+        return redirect()
+            ->route('profile.index', ['username' =>$username])
+            ->with('success', 'Zaproszenie zostało zaakceptowane');
+    }
 }
 

@@ -14,3 +14,11 @@
         </button>
     </div>
 @endif
+@if (Session::has('alert'))
+    <div class="alert callout" data-closable >
+        {{ Session::get('alert') }}
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif

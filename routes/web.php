@@ -78,3 +78,15 @@ Route::get('/znajomi',[
     'middleware'=>['auth'],
 ]);
 
+Route::get('/znajomi/dodaj/{username}',[
+    'uses' => '\Bevy\Http\Controllers\FriendController@getAdd',
+    'as'=> 'friend.add',
+    'middleware'=>['auth'],
+]);
+
+Route::get('/znajomi/akceptuj/{username}',[
+    'uses' => '\Bevy\Http\Controllers\FriendController@getAccept',
+    'as'=> 'friend.accept',
+    'middleware'=>['auth'],
+]);
+
