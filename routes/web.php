@@ -89,4 +89,16 @@ Route::get('/znajomi/akceptuj/{username}',[
     'as'=> 'friend.accept',
     'middleware'=>['auth'],
 ]);
+/*Statuses*/
 
+Route::post('/status',[
+    'uses' => '\Bevy\Http\Controllers\StatusController@postStatus',
+    'as'=> 'status.post',
+    'middleware'=>['auth'],
+]);
+
+Route::post('/status/{statusId}/odpowiedz',[
+    'uses' => '\Bevy\Http\Controllers\StatusController@postReply',
+    'as'=> 'status.reply',
+    'middleware'=>['auth'],
+]);
