@@ -5,6 +5,63 @@
      <div class="large-5 columns">
 @include('users.partials.usersblock')
          <hr>
+         <div class="row">
+             <div class="large-12 columns">
+                 @if (!$statuses->count())
+                     <p>{{$user->getFirstNameOrUsername() }} jeszcze niczego nie udostępniłaś/eś !</p>
+                 @else
+                     @foreach($statuses as $status)
+                         <div class="media-object">
+                             <div class="media-object-section">
+                                 <div class="thumbnail">
+                                     <a href="{{ route('profile.index',['username' => $status->user->username]) }}">
+                                         <img alt="{{ $status->user->getNameOrUsername() }}" src="{{ $status->user->getAvatarUrl() }} ">
+                                     </a>
+                                 </div>
+                             </div>
+                             <div class="media-object-section">
+                                 <a href="{{ route('profile.index',['username' => $status->user->username]) }}"><h4>{{ $status->user->getNameOrUsername() }}</h4></a>
+                                 <p>{{ $status->body }}</p>
+                                 <ul class="menu">
+                                     <li>{{ $status->created_at->diffForHumans() }}</li>
+                                     <li><a href="#">Lubię</a></li>
+                                     <li>10 likes</li>
+                                 </ul>
+                             </div>
+                         </div>
+                         <h3>Komentarze</h3>
+                         @foreach($status->replies as $reply)
+                             <div class="comment-section-container">
+                                 <div class="comment-section-author menu">
+                                     <a href="{{ route('profile.index',['username'=> $reply->user->username]) }}"><img src="{{$reply->user->getAvatarUrl() }}" alt="{{ $reply->user->getNameOrUsername() }}"></a>
+                                     <h5><a href="{{ route('profile.index',['username'=> $reply->user->username]) }}">{{$reply->user->getNameOrUsername() }}</a></h5>
+                                 </div>
+                                 <div class="comment-section-text">
+                                     <p>{{ $reply -> body }}
+                                     </p>
+                                 </div>
+                                 <div class="comment-section-like-date menu">
+                                     <p>{{ $reply->created_at->diffForHumans() }}</p>
+                                 </div>
+                             </div>
+
+                         @endforeach
+                    @if($authUserIsFriend || Auth::user()->id === $status->user->id)
+                         <form role="form" action="{{ route('status.reply',['statusId' => $status->id]) }}" method="post">
+                             <textarea name="reply-{{$status->id }}" rows="2" placeholder="Napisz komentarz"></textarea>
+                             @if($errors->has("reply-{$status->id}"))
+                                 <p class="help-text" id="form-error2">{{$errors->first("reply-{$status->id}")}}</p>
+                             @endif
+                             <input type="submit" value="Skomentuj" class="button small">
+                             <input type="hidden" name="_token" value="{{ Session::token() }}">
+                         </form>
+                         @endif
+                     @endforeach
+
+                 @endif
+             </div>
+         </div>
+
      </div>
      <div class="large-4 large-offset-3 columns">
          @if (Auth::user()->hasFriendRequestsPending($user))
