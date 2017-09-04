@@ -24,8 +24,10 @@
                                  <p>{{ $status->body }}</p>
                                  <ul class="menu">
                                      <li>{{ $status->created_at->diffForHumans() }}</li>
-                                     <li><a href="#">Lubię</a></li>
-                                     <li>10 likes</li>
+                                     @if ($status->user->id !== Auth::user()->id)
+                                     <li><a href="{{ route('status.like',['statusId' => $status->id]) }}">Lubię</a></li>
+                                     @endif
+                                     <li>&nbsp&nbsp{{ $status->likes()->count() }}&nbsplubie</li>
                                  </ul>
                              </div>
                          </div>
@@ -40,9 +42,13 @@
                                      <p>{{ $reply -> body }}
                                      </p>
                                  </div>
-                                 <div class="comment-section-like-date menu">
-                                     <p>{{ $reply->created_at->diffForHumans() }}</p>
-                                 </div>
+                                 <ul class="comment-section-like-date menu">
+                                     <li>{{ $reply->created_at->diffForHumans() }}</li>
+                                     @if ($reply->user->id !== Auth::user()->id)
+                                         <li><a href="{{ route('status.like',['statusId' => $reply->id]) }}">Lubię</a></li>
+                                     @endif
+                                     <li>&nbsp&nbsp{{ $reply->likes()->count() }}&nbsplubie</li>
+                                 </ul>
                              </div>
 
                          @endforeach

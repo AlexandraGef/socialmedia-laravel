@@ -30,4 +30,11 @@ class Status extends Model
     {
         return $this->hasMany('Bevy\Models\Status','parent_id');
     }
+
+    public function likes()
+    {
+        return $this->morphMany('Bevy\Models\Like', 'likeable');
+    }
+
+
 }

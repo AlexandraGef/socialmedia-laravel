@@ -102,3 +102,9 @@ Route::post('/status/{statusId}/odpowiedz',[
     'as'=> 'status.reply',
     'middleware'=>['auth'],
 ]);
+
+Route::get('/status/{statusId}/lubie',[
+    'uses' => '\Bevy\Http\Controllers\StatusController@getLike',
+    'as'=> 'status.like',
+    'middleware'=>['auth'],
+]);
