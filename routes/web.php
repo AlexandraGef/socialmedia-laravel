@@ -89,6 +89,12 @@ Route::get('/znajomi/akceptuj/{username}',[
     'as'=> 'friend.accept',
     'middleware'=>['auth'],
 ]);
+
+Route::post('/znajomi/usun/{username}',[
+    'uses' => '\Bevy\Http\Controllers\FriendController@postDelete',
+    'as'=> 'friend.delete',
+    'middleware'=>['auth'],
+]);
 /*Statuses*/
 
 Route::post('/status',[
